@@ -49,13 +49,14 @@ export default async function handler(req, res) {
         max_tokens: 2000,
         system: systemPrompt(),
         tools: [TOOL],
-        tool_choice: { type: "tool", name: TOOL.name },
+        // "auto": i modelli più recenti non accettano la scelta forzata dello strumento
+        tool_choice: { type: "auto" },
         messages: [
           {
             role: "user",
             content: [
               { type: "image", source: { type: "base64", media_type: mediaType || "image/jpeg", data: immagine } },
-              { type: "text", text: "Analizza questa foto di cantiere secondo le schede." },
+              { type: "text", text: "Analizza questa foto di cantiere secondo le schede e rispondi SOLO chiamando lo strumento registra_rilievi." },
             ],
           },
         ],
@@ -69,11 +70,16 @@ export default async function handler(req, res) {
     }
 
     const blocco = (dati.content || []).find((b) => b.type === "tool_use");
-    if (!blocco) {
+    let out = blocco ? blocco.input : null;
+    if (!out) {
+      // Ripiego: il modello ha risposto in testo, cerco un JSON nel testo
+      const testo = (dati.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n");
+      const m = testo.match(/\{[\s\S]*\}/);
+      try { out = m ? JSON.parse(m[0]) : null; } catch (_) { out = null; }
+    }
+    if (!out) {
       return res.status(502).json({ errore: "Risposta AI non leggibile, riprovare" });
     }
-
-    const out = blocco.input || {};
     // Pulizia: solo casi previsti, un rilievo per caso+descrizione, massimo 6, ordinati per gravità
     const visti = new Set();
     const rilievi = (Array.isArray(out.rilievi) ? out.rilievi : [])
