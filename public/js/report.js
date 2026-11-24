@@ -89,6 +89,52 @@ export async function generaPDF({ sessione, foto, rilievi, note, firma }) {
     testo(`Foto senza rilievi: ${senza.map((f) => `${fmtOra(f.ora)}${f.area ? " (" + f.area + ")" : ""}`).join(", ")}. Questo non significa che l'area sia sicura.`, M, 9, COL.muted);
   }
 
+  // ---------- Elenco rilievi (tabella) ----------
+  if (rilievi.length) {
+    y += 6;
+    spazio(20);
+    testo("Elenco rilievi", M, 13, COL.navy, "bold"); y += 2;
+    // colonne: N | Gravità | Descrizione | Area | Stato | F.S.
+    const cols = [
+      { t: "N.", w: 9 }, { t: "Gravità", w: 20 }, { t: "Descrizione", w: 72 },
+      { t: "Area", w: 37 }, { t: "Stato", w: 24 }, { t: "Fuori serv.", w: CW - 9 - 20 - 72 - 37 - 24 },
+    ];
+    const intestazione = () => {
+      doc.setFillColor(...COL.navy); doc.rect(M, y, CW, 7, "F");
+      doc.setFont("helvetica", "bold"); doc.setFontSize(8.5); doc.setTextColor(255, 255, 255);
+      let x = M; cols.forEach((c) => { doc.text(c.t, x + 1.5, y + 4.8); x += c.w; });
+      y += 7;
+    };
+    intestazione();
+    rilievi.forEach(({ f, r }, k) => {
+      doc.setFont("helvetica", "normal"); doc.setFontSize(8.5);
+      const celle = [
+        String(k + 1),
+        GRAVITA[r.gravita].priorita,
+        r.descrizione,
+        f.area || "-",
+        r.stato,
+        r.fuoriServizio.attivo ? "Sì" : (r.fuoriServizio.proponi ? "Proposto" : "No"),
+      ];
+      const righe = celle.map((c, i) => doc.splitTextToSize(c, cols[i].w - 3));
+      const h = Math.max(...righe.map((r) => r.length)) * 3.7 + 3;
+      if (y + h > H - 16) { nuovaPagina(); intestazione(); }
+      if (k % 2) { doc.setFillColor(245, 247, 250); doc.rect(M, y, CW, h, "F"); }
+      let x = M;
+      righe.forEach((rr, i) => {
+        if (i === 1) { doc.setTextColor(...COL[r.gravita]); doc.setFont("helvetica", "bold"); }
+        else if (i === 5 && r.fuoriServizio.attivo) { doc.setTextColor(...COL.alta); doc.setFont("helvetica", "bold"); }
+        else { doc.setTextColor(26, 31, 38); doc.setFont("helvetica", "normal"); }
+        rr.forEach((riga, j) => doc.text(riga, x + 1.5, y + 4 + j * 3.7));
+        x += cols[i].w;
+      });
+      doc.setDrawColor(...COL.line); doc.setLineWidth(0.2); doc.line(M, y + h, M + CW, y + h);
+      y += h;
+    });
+    y += 3;
+    testo("Il dettaglio di ogni rilievo (foto, requisito, suggerimento e azioni) è nelle pagine seguenti.", M, 8.5, COL.muted);
+  }
+
   // ---------- Schede rilievo ----------
   let n = 0;
   for (const { f, r } of rilievi) {
