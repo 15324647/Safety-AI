@@ -150,7 +150,7 @@ $gal.addEventListener("change", (e) => { const file = e.target.files[0]; e.targe
 // ---------------------------------------------------------------------
 function topbar(titolo, sub = "", back = true) {
   return `<header class="topbar">
-    ${back ? `<button class="back" data-act="back" aria-label="Indietro">‹</button>` : ""}
+    ${back ? `<button class="back" data-act="back" aria-label="Indietro">‹ <span>Indietro</span></button>` : ""}
     <h1>${esc(titolo)}${sub ? `<span class="sub">${esc(sub)}</span>` : ""}</h1>
   </header>${state.sessione?.demo ? `<div class="demo-flag">MODALITÀ PROVA · RISULTATI SIMULATI, NON AI</div>` : ""}`;
 }
@@ -358,6 +358,7 @@ function vistaDettaglio() {
     ${azioni}
     ${bloccoFS}
     ${stato}
+    <button class="btn btn-secondary" data-act="back">‹ Torna alla lista dei rischi</button>
   </div>
   <div class="bottombar"><div class="inner">
     <button data-act="conferma" class="${r.stato === "Confermato" || r.stato === "Modificato" ? "on-ok" : ""}"><span class="i">✔︎</span>Conferma</button>

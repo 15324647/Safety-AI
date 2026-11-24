@@ -225,3 +225,6 @@ body {
 .disclaimer { font-size: 12px; color: var(--muted); text-align: center; padding: 4px 8px; }
 
 .rilievo-card .apri { margin-top: 8px; font-size: 13px; font-weight: 700; color: var(--blu); }
+
+.topbar button.back { display: inline-flex; align-items: center; gap: 4px; font-size: 24px; border: 1px solid rgba(255,255,255,.35); border-radius: 8px; padding: 2px 10px 4px 6px; }
+.topbar button.back span { font-size: 14px; font-weight: 600; }
