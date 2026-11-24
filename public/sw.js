@@ -1,6 +1,6 @@
 // Service worker minimo: rende l'app installabile e veloce da aprire.
 // L'analisi AI richiede sempre la connessione.
-const CACHE = "safety-ai-v1";
+const CACHE = "safety-ai-v2";
 const FILES = [
   "/", "/index.html", "/css/styles.css",
   "/js/app.js", "/js/catalogo.js", "/js/demo.js", "/js/report.js",

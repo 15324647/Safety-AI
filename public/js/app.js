@@ -266,6 +266,7 @@ function vistaRisultati() {
           ${r.certezza === "verifica_necessaria" ? `<span class="tag verifica">VERIFICA NECESSARIA</span>` : ""}
           ${r.fuoriServizio.attivo ? `<span class="tag fs">FUORI SERVIZIO</span>` : ""}
           <span class="tag stato">${esc(r.stato)}</span>
+          <div class="apri">Tocca per azioni e dettagli ›</div>
         </div>
         <div class="chev">›</div>
       </div>`).join("");

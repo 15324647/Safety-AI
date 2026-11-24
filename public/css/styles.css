@@ -223,3 +223,5 @@ body {
 
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(100px + var(--safe-bottom)); background: #1E2A38; color: #fff; padding: 10px 16px; border-radius: 10px; font-size: 14px; z-index: 60; max-width: 90vw; text-align: center; }
 .disclaimer { font-size: 12px; color: var(--muted); text-align: center; padding: 4px 8px; }
+
+.rilievo-card .apri { margin-top: 8px; font-size: 13px; font-weight: 700; color: var(--blu); }
