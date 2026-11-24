@@ -45,7 +45,7 @@ export async function generaPDF({ sessione, foto, rilievi, note, firma }) {
   doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(17);
   doc.text("REPORT ISPEZIONE SAFETY", M, 13);
   doc.setFont("helvetica", "normal"); doc.setFontSize(10);
-  doc.text("Safety AI Agent - versione dimostrativa", M, 20);
+  doc.text("SAIF - Safety AI in the Field  ·  versione dimostrativa", M, 20);
   doc.text(fmt(Date.now()), W - M, 13, { align: "right" });
   y = 38;
 

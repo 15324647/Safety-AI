@@ -171,9 +171,10 @@ function vistaLogin() {
   return `
   <div class="page">
     <div class="login-hero">
-      <div class="logo">${ICONA_LOGO}</div>
-      <h2>Safety AI Agent</h2>
-      <p>Supporto all'ispezione di cantiere</p>
+      <img class="logo-img" src="/icons/icon-512.png" alt="" width="112" height="112">
+      <h2>SAIF</h2>
+      <div class="claim">Safety AI in the Field</div>
+      <p class="motto">Scan the area,<br>Spot the hazards,<br>Eliminate the causes.</p>
     </div>
     <form id="fLogin" class="card" style="display:flex;flex-direction:column;gap:12px">
       <div class="field"><label for="ispettore">Ispettore</label>

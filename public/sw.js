@@ -1,11 +1,11 @@
 // Service worker minimo: rende l'app installabile e veloce da aprire.
 // L'analisi AI richiede sempre la connessione.
-const CACHE = "safety-ai-v3";
+const CACHE = "saif-v1";
 const FILES = [
   "/", "/index.html", "/css/styles.css",
   "/js/app.js", "/js/catalogo.js", "/js/demo.js", "/js/report.js",
   "/vendor/jspdf.umd.min.js", "/manifest.webmanifest",
-  "/icons/icon-192.png", "/icons/apple-touch-icon.png",
+  "/icons/icon-192.png", "/icons/apple-touch-icon.png", "/icons/icon-512.png",
 ];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));

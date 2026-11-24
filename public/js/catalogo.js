@@ -1,5 +1,5 @@
 // =====================================================================
-//  CATALOGO RISCHI — Safety AI Agent (demo)
+//  CATALOGO RISCHI — SAIF Safety AI in the Field (demo)
 //  Fonte: "Scheda di raccolta contenuti safety" v5
 //
 //  Questo è l'UNICO file da modificare quando cambiano i contenuti.

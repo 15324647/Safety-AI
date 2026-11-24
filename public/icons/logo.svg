@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B4D7A"/><stop offset="1" stop-color="#0B2238"/></linearGradient>
+<linearGradient id="h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD84D"/><stop offset="1" stop-color="#F5B400"/></linearGradient></defs>
+<rect width="1024" height="1024" fill="url(#g)"/>
+<!-- mirino -->
+<g fill="none" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round" opacity=".95">
+<path d="M190 330 V190 H330"/><path d="M694 190 H834 V330"/><path d="M834 694 V834 H694"/><path d="M330 834 H190 V694"/></g>
+<!-- elmetto -->
+<path d="M300 610 C300 450 395 350 512 350 C629 350 724 450 724 610 Z" fill="url(#h)"/>
+<path d="M470 352 C480 330 544 330 554 352 L566 500 H458 Z" fill="#F0A800"/>
+<rect x="250" y="600" width="524" height="64" rx="32" fill="#F5B400"/>
+<rect x="250" y="600" width="524" height="22" rx="11" fill="#FFE07A" opacity=".6"/>
+<!-- scintilla AI -->
+<path d="M760 380 L778 430 L828 448 L778 466 L760 516 L742 466 L692 448 L742 430 Z" fill="#FFFFFF"/>
+</svg>
