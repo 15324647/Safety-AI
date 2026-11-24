@@ -3,7 +3,7 @@ import { GRAVITA } from "./catalogo.js";
 
 const COL = {
   navy: [15, 42, 68], muted: [95, 107, 122], line: [221, 226, 232],
-  alta: [198, 40, 40], media: [230, 106, 0], bassa: [199, 154, 0],
+  alta: [198, 40, 40], media: [230, 106, 0], bassa: [244, 194, 13],
   verde: [46, 125, 50], blu: [21, 101, 192], arancio: [230, 106, 0],
 };
 const fmt = (t) => new Date(t).toLocaleString("it-IT", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
@@ -75,7 +75,7 @@ export async function generaPDF({ sessione, foto, rilievi, note, firma }) {
   ["alta", "media", "bassa"].forEach((g, i) => {
     const x = M + i * (bw + 4);
     doc.setFillColor(...COL[g]); doc.roundedRect(x, y, bw, 18, 2, 2, "F");
-    doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(18);
+    if (g === "bassa") doc.setTextColor(58, 46, 0); else doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(18);
     doc.text(String(c[g]), x + bw / 2, y + 10, { align: "center" });
     doc.setFontSize(9); doc.text(`Rischio ${GRAVITA[g].etichetta.toLowerCase()}`, x + bw / 2, y + 15.5, { align: "center" });
   });
@@ -122,7 +122,7 @@ export async function generaPDF({ sessione, foto, rilievi, note, firma }) {
       if (k % 2) { doc.setFillColor(245, 247, 250); doc.rect(M, y, CW, h, "F"); }
       let x = M;
       righe.forEach((rr, i) => {
-        if (i === 1) { doc.setTextColor(...COL[r.gravita]); doc.setFont("helvetica", "bold"); }
+        if (i === 1) { doc.setTextColor(...(r.gravita === "bassa" ? [176, 132, 0] : COL[r.gravita])); doc.setFont("helvetica", "bold"); }
         else if (i === 5 && r.fuoriServizio.attivo) { doc.setTextColor(...COL.alta); doc.setFont("helvetica", "bold"); }
         else { doc.setTextColor(26, 31, 38); doc.setFont("helvetica", "normal"); }
         rr.forEach((riga, j) => doc.text(riga, x + 1.5, y + 4 + j * 3.7));
@@ -143,7 +143,7 @@ export async function generaPDF({ sessione, foto, rilievi, note, firma }) {
     const col = COL[r.gravita];
 
     doc.setFillColor(...col); doc.rect(M, y, CW, 16, "F");
-    doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(12);
+    if (r.gravita === "bassa") doc.setTextColor(58, 46, 0); else doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(12);
     doc.text(`${n}. ${r.titolo}`, M + 4, y + 6.5);
     doc.setFont("helvetica", "normal"); doc.setFontSize(9.5);
     doc.text(doc.splitTextToSize(r.descrizione, CW - 8)[0], M + 4, y + 12.5);

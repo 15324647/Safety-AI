@@ -9,7 +9,7 @@
 
   --alta: #C62828;
   --media: #E66A00;
-  --bassa: #C79A00;
+  --bassa: #F4C20D;
 
   --arancio-bg: #FFF3E6;
   --arancio: #E66A00;
@@ -233,3 +233,7 @@ body {
 .login-hero h2 { font-size: 40px; letter-spacing: 6px; color: var(--navy); font-weight: 800; }
 .login-hero .claim { font-size: 17px; font-weight: 700; color: var(--navy-2); margin-top: 2px; }
 .login-hero .motto { font-size: 15px; color: #8A95A3; margin-top: 12px; line-height: 1.5; }
+
+/* testo scuro su giallo (rischio basso) per leggibilità */
+.counter.bassa, .pill.bassa { color: #3A2E00; }
+.banner.bassa { color: #2B2100; }
