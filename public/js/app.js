@@ -396,7 +396,10 @@ function vistaReport() {
     <div class="field"><label>Firma</label>
       <div class="firma-wrap"><canvas id="firma"></canvas><button class="clear" data-act="cancellaFirma">Cancella</button><span class="ph">Firma con il dito</span></div></div>
     <div id="pdfBtns" style="display:flex;flex-direction:column;gap:10px">${pulsantiPdf()}</div>
-    <button class="btn btn-ghost" data-act="nuovaIspezione">Nuova ispezione</button>
+    <div class="row" style="margin-top:6px">
+      <button class="btn btn-secondary" data-act="home">🏠 Torna all'ispezione</button>
+      <button class="btn btn-secondary" data-act="termina">✓ Termina ispezione</button>
+    </div>
   </div>`;
 }
 
@@ -556,6 +559,16 @@ $app.addEventListener("click", (e) => {
       if (state.foto.length && !confirm("Uscire? Le foto e i rilievi di questa ispezione andranno persi.")) return;
       Object.assign(state, { sessione: null, foto: [], note: "", firma: null, pdf: null });
       pila.length = 0; vista = { nome: "login" }; render(); break;
+    case "termina": {
+      const msg = state.pdf
+        ? "Terminare l'ispezione? Foto e rilievi verranno cancellati dal telefono. Assicurati di aver condiviso o scaricato il PDF."
+        : "Il PDF non è ancora stato creato. Terminare comunque? Foto e rilievi andranno persi.";
+      if (!confirm(msg)) return;
+      Object.assign(state, { sessione: null, foto: [], note: "", firma: null, pdf: null });
+      pila.length = 0; vista = { nome: "login" }; render(); window.scrollTo(0, 0);
+      toast("Ispezione terminata");
+      break;
+    }
     case "nuovaIspezione":
       if (!confirm("Iniziare una nuova ispezione? Foto e rilievi attuali andranno persi.")) return;
       Object.assign(state, { foto: [], note: "", firma: null, pdf: null });
