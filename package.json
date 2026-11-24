@@ -1,0 +1,7 @@
+{
+  "name": "safety-ai-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "App dimostrativa Safety AI Agent - ispezioni di cantiere con analisi foto"
+}
